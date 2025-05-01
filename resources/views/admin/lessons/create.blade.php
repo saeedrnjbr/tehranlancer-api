@@ -45,7 +45,7 @@
                         <label class="mb-3 block text-sm font-medium text-black dark:text-white">
                             لینک تصویر ویدیو
                         </label>
-                        <input value="{{ !empty($edit) && $edit->thumbnail_link ? $edit->thumbnail_link : @old("thumbnail_link") }}"  type="text" name="link" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                        <input value="{{ !empty($edit) && $edit->thumbnail_link ? $edit->thumbnail_link : @old("thumbnail_link") }}"  type="text" name="thumbnail_link" class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
                     </div>
                     
                     <div>
