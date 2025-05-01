@@ -7,6 +7,7 @@ class Lesson extends BaseModel
         'name',
         'duration',
         'link',
+        'thumbnail_link',
         'course_id',
         'is_active',
     ];

@@ -11,6 +11,7 @@ class Movie extends BaseModel
         'age_group',
         'genre_id',
         'link',
+        'thumbnail_link',
         'content',
         'description',
         'image',
