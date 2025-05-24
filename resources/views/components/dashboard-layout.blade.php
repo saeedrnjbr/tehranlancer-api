@@ -182,7 +182,7 @@
                                 <div class="translate transform overflow-hidden"
                                     :class="(selected === 'Task') ? 'block' : 'hidden'">
                                     <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-2">
-                                        
+
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                                                 href="{{ route('admin.genres.index') }}"
@@ -254,13 +254,19 @@
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                                                 href="{{ route('admin.event_categories.index') }}"
-                                                :class="page === 'event-categories' && '!text-white'">دسته‌بندی رویداد‌ها
+                                                :class="page === 'event-categories' && '!text-white'">دسته‌بندی
+                                                رویداد‌ها
                                             </a>
                                         </li>
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="{{ route("admin.events.index") }}"
+                                                href="{{ route('admin.events.index') }}"
                                                 :class="page === 'events' && '!text-white'">رویداد‌ها</a>
+                                        </li>
+                                           <li>
+                                            <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                                                href="{{ route('admin.events.requests') }}"
+                                                :class="page === 'events' && '!text-white'">درخواست‌ها</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -321,14 +327,16 @@
                                     <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-2">
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="{{ route("admin.product_categories.index") }}" :class="page === 'settings' && '!text-white'">
+                                                href="{{ route('admin.product_categories.index') }}"
+                                                :class="page === 'settings' && '!text-white'">
                                                 دسته‌بندی محصولات
                                             </a>
                                         </li>
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="{{ route("admin.products.index") }}" :class="page === 'settings' && '!text-white'">
-                                                 محصولات
+                                                href="{{ route('admin.products.index') }}"
+                                                :class="page === 'settings' && '!text-white'">
+                                                محصولات
                                             </a>
                                         </li>
                                     </ul>
@@ -381,34 +389,34 @@
                                     <ul class="mt-4 mb-3 flex flex-col gap-2 pl-6">
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="{{ route("admin.course_categories.index") }}"
+                                                href="{{ route('admin.course_categories.index') }}"
                                                 :class="page === 'basicChart' && '!text-white'">دسته‌بندی دوره‌ها</a>
                                         </li>
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="{{ route("admin.courses.index") }}"
+                                                href="{{ route('admin.courses.index') }}"
                                                 :class="page === 'advancedChart' && '!text-white'">دوره‌ها
-                                                </a>
+                                            </a>
                                         </li>
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="{{ route("admin.lessons.index") }}"
+                                                href="{{ route('admin.lessons.index') }}"
                                                 :class="page === 'advancedChart' && '!text-white'">جلسات
-                                                </a>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Dropdown Menu End -->
                             </li>
                             <!-- Menu Item Chart -->
-                            
+
                         </ul>
 
-                     
+
                     </div>
 
 
-                    
+
                 </nav>
                 <!-- Sidebar Menu -->
 
@@ -529,14 +537,25 @@
             </header>
             <main>
                 <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-                    @if (!empty($link))
-                        <div class="flex items-center justify-end mb-5">
-                            <a href="{{ $link }}"
-                                class="inline-flex items-center justify-center rounded-md border border-meta-3 py-2 px-10 text-center font-medium text-meta-3 hover:bg-opacity-90 lg:px-8 xl:px-10">
-                                مورد جدید
-                            </a>
-                        </div>
-                    @endif
+                    <div class="flex items-center gap-2 justify-end">
+                        @if (!empty($export))
+                            <div class="flex items-center justify-end mb-5">
+                                <a href="{{ $export }}"
+                                    class="inline-flex items-center justify-center rounded-md border border-meta-3 bg-green-500 text-white py-2 px-10 text-center font-medium text-meta-3 hover:bg-opacity-90 lg:px-8 xl:px-10">
+                                    خروجی اکسل
+                                </a>
+                            </div>
+                        @endif
+                        @if (!empty($link))
+                            <div class="flex items-center justify-end mb-5">
+                                <a href="{{ $link }}"
+                                    class="inline-flex items-center justify-center rounded-md border border-meta-3 py-2 px-10 text-center font-medium text-meta-3 hover:bg-opacity-90 lg:px-8 xl:px-10">
+                                    مورد جدید
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+
                     {{ $slot }}
                 </div>
             </main>

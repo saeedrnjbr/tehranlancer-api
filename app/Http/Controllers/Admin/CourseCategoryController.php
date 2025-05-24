@@ -20,8 +20,8 @@ class CourseCategoryController extends BaseController
                 unset($elements[$element['id']]);
             }
         }
-        usort($categories, function($a, $b){
-            return $a["id"] > $b["id"] ;
+        usort($categories, function ($a, $b) {
+            return $a["id"] > $b["id"];
         });
         return $categories;
     }
@@ -98,7 +98,7 @@ class CourseCategoryController extends BaseController
         return redirect()->route("admin.course_categories.index");
 
     }
-    
+
     public function remove($id)
     {
 
@@ -112,16 +112,9 @@ class CourseCategoryController extends BaseController
         return response()->json(CourseCategory::where("is_active", 1)->orderByDesc("created_at")->paginate(10));
     }
 
-    public function tree()
+    public function tree($id = 0)
     {
-        $cats       = CourseCategory::select(['id', 'name', 'parent_id'])->get()->toArray();
-        $categories = $this->buildTree($cats);
-
-        return response()->json([
-            "error" => false,
-            "data"  => $categories,
-        ]);
-
+        return response()->json(CourseCategory::where("parent_id", $id)->where("is_active", 1)->orderByDesc("created_at")->paginate(50));
     }
 
     public function showCourseCategory($id)

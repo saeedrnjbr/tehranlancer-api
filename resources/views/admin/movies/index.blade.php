@@ -24,6 +24,9 @@
                             <th class="min-w-[120px] py-4 px-4 font-medium text-right text-black dark:text-white">
                                 وضعیت
                             </th>
+                             <th class="min-w-[150px] py-4 px-4 font-medium text-right text-black dark:text-white">
+                                پیشنهادات
+                            </th>
                             <th class="py-4 px-4 font-medium text-black  text-right dark:text-white">
                                 عملیات
                             </th>
@@ -48,6 +51,11 @@
                                     <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                         @include('partials.status', [
                                             'status' => $row->is_active,
+                                        ])
+                                    </td>
+                                    <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                                        @include('partials.status', [
+                                            'status' => $row->is_offer,
                                         ])
                                     </td>
                                     <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">

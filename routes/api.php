@@ -21,7 +21,7 @@ Route::get('/events/{id}', [EventController::class, "showEvent"]);
 Route::get('/movies/{id}', [MovieController::class, "showMovie"]);
 Route::get('/event-categories', [EventCategoryController::class, "categories"]);
 Route::get('/course-categories', [CourseCategoryController::class, "categories"]);
-Route::get('/course-categories/tree', [CourseCategoryController::class, "tree"]);
+Route::get('/course-categories/tree/{id?}', [CourseCategoryController::class, "tree"]);
 Route::get('/course-categories/{id}/courses', [CourseCategoryController::class, "showCourses"]);
 Route::get('/course-categories/{id}', [CourseCategoryController::class, "showCourseCategory"]);
 Route::get('/courses', [CourseController::class, "courses"]);

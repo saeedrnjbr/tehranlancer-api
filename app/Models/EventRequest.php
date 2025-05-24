@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventRequest extends Model
 {
+
+    protected $appends = ["nick_name"];
+
     protected $fillable = [
         'mobile',
         'first_name',
@@ -14,4 +17,11 @@ class EventRequest extends Model
         'level',
         'event_id',
     ];
+
+
+        public function getNickNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+
 }

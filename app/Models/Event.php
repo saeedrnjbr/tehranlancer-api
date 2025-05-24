@@ -17,6 +17,7 @@ class Event extends BaseModel
         'expired_at',
         'event_category_id',
         'is_active',
+        "description"
     ];
 
     public function getExpiredAtFaAttribute()

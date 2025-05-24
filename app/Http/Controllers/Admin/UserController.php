@@ -2,12 +2,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserType;
+use App\Exports\UserExport;
 use App\Helper\Cacher;
 use App\Models\OtpCode;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends BaseController
 {
@@ -58,10 +60,17 @@ class UserController extends BaseController
     public function index()
     {
 
-        $rows = User::paginate($this->perPage);
+        $rows = User::orderByDesc("created_at")->paginate($this->perPage);
 
         return view("admin.users.index", compact("rows"));
     }
+
+
+    public function export()
+    {
+        return Excel::download(new UserExport(request()->all()), 'users-' . time() . '.xlsx');
+    }
+
 
     public function create()
     {

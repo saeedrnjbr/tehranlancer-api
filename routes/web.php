@@ -40,7 +40,9 @@ Route::group(["prefix" => "/admin"], function () {
             Route::get('/', [UserController::class, "index"])->name("admin.users.index");
     
             Route::get('/create', [UserController::class, "create"])->name("admin.users.create");
-            
+           
+            Route::get('/export', [UserController::class, "export"])->name("admin.users.export");
+
             Route::get('/create/{id}', [UserController::class, "show"])->name("admin.users.show");
 
             Route::post('/', [UserController::class, "store"])->name("admin.users.store");
@@ -158,6 +160,8 @@ Route::group(["prefix" => "/admin"], function () {
             Route::get('/image/remove/{id}', [EventController::class, "removeImage"])->name("admin.events.remove.image");
 
             Route::get('/remove/{id}', [EventController::class, "remove"])->name("admin.events.remove");
+
+            Route::get('/requests', [EventController::class, "requests"])->name("admin.events.requests");
 
         });
 

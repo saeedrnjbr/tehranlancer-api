@@ -19,6 +19,14 @@ class EventController extends BaseController
         return view("admin.events.index", compact("rows"));
     }
 
+    public function requests()
+    {
+
+        $rows = EventRequest::paginate($this->perPage);
+
+        return view("admin.events.requests", compact("rows"));
+    }
+
     public function create()
     {
         $event_categories = EventCategory::all();
@@ -134,12 +142,12 @@ class EventController extends BaseController
     {
 
         $validator = Validator::make(request()->all(), [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'mobile' => 'required',
+            'first_name'         => 'required',
+            'last_name'          => 'required',
+            'mobile'             => 'required',
             'alternative_mobile' => 'required',
-            'level' => 'required',
-            'event_id' => 'required'
+            'level'              => 'required',
+            'event_id'           => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -152,20 +160,19 @@ class EventController extends BaseController
 
         $event = Event::find(request("event_id"));
 
-        if($event->expired_at < Carbon::now()->getTimestamp()){
+        if ($event->expired_at < Carbon::now()->getTimestamp()) {
             return response()->json([
                 "error"   => true,
                 "data"    => [],
-                "message" =>  "کاربر گرامی تاریخ دوره منقضی شده است",
+                "message" => "کاربر گرامی تاریخ دوره منقضی شده است",
             ]);
         }
-
 
         $eventRequest = EventRequest::create(request()->all());
 
         return response()->json([
             "error" => false,
-            "data" => [$eventRequest],
+            "data"  => [$eventRequest],
         ]);
 
     }

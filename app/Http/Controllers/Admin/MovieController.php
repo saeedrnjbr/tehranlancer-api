@@ -120,7 +120,7 @@ class MovieController extends BaseController
 
     public function movies()
     {
-        return response()->json(Movie::with("genre")->where("is_active", 1)->orderByDesc("created_at")->paginate(6));
+        return response()->json(Movie::with("genre")->where("is_active", 1)->where("is_offer", 1)->orderByDesc("created_at")->paginate(6));
     }
 
     public function showMovie($id)

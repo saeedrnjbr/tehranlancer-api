@@ -16,6 +16,7 @@ class Movie extends BaseModel
         'description',
         'image',
         'is_active',
+        'is_offer'
     ];
 
     public function getImageLinkAttribute()
