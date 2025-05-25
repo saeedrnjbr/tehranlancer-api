@@ -26,6 +26,7 @@ Route::get('/course-categories/{id}/courses', [CourseCategoryController::class, 
 Route::get('/course-categories/{id}', [CourseCategoryController::class, "showCourseCategory"]);
 Route::get('/courses', [CourseController::class, "courses"]);
 Route::get('/courses/{id}', [CourseController::class, "showCourse"]);
+Route::get('/courses/level/{id}', [CourseController::class, "coursesLevel"]);
 Route::get('/courses/{id?}/lessons', [CourseController::class, "lessons"]);
 Route::get('/lessons/{id}', [LessonController::class, "showLesson"]);
 Route::get('/freelancers', [FreelancerController::class, "freelancers"]);

@@ -65,12 +65,10 @@ class UserController extends BaseController
         return view("admin.users.index", compact("rows"));
     }
 
-
     public function export()
     {
         return Excel::download(new UserExport(request()->all()), 'users-' . time() . '.xlsx');
     }
-
 
     public function create()
     {
@@ -172,11 +170,17 @@ class UserController extends BaseController
 
             $newUser->is_active = 1;
 
+            $newUser->coupons = 2;
+
             $newUser->password = $code;
 
             $newUser->save();
 
             $user = $newUser;
+
+            if (! empty(request("referral")) && request("mobile") != request("referral")) {
+                User::where("mobile", request("referral"))->increment("coupons", 10);
+            }
 
         }
 
@@ -330,11 +334,17 @@ class UserController extends BaseController
 
             $newUser->password = $code;
 
+            $newUser->coupons = 2;
+
             $newUser->is_active = 1;
 
             $newUser->save();
 
             $user = $newUser;
+
+            if (! empty(request("referral")) && request("mobile") != request("referral")) {
+                User::where("mobile", request("referral"))->increment("coupons", 10);
+            }
 
         }
 

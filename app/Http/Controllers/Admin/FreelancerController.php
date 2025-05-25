@@ -131,8 +131,6 @@ class FreelancerController extends BaseController
             "avatar"             => "required|max:5120|mimes:jpg,jpeg,png",
             "gender"             => "required|in:male,female",
             "school"             => "required",
-            "field"              => "required",
-            "courses" => "required",
         ]);
 
         if ($validator->fails()) {
@@ -163,7 +161,7 @@ class FreelancerController extends BaseController
 
             $data["avatar"] = $image;
 
-        }
+        }   
 
         $data["user_id"] = $user->id;
 

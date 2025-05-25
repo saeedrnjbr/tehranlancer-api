@@ -34,15 +34,16 @@ class CourseController extends BaseController
     }
 
     public function store()
-    {   
+    {
 
         $validator = \Validator::make(request()->all(), [
-            "name" => "required",
-            "image" => "required",
+            "name"               => "required",
+            "level"              => "required",
+            "image"              => "required",
             "course_category_id" => "required",
-            "content" => "required",
-            "description" => "required",
-            "is_active" => "required"
+            "content"            => "required",
+            "description"        => "required",
+            "is_active"          => "required",
         ]);
 
         if ($validator->fails()) {
@@ -51,11 +52,11 @@ class CourseController extends BaseController
 
         $data = request()->all();
 
-        if (!empty(request()->file("image"))) {
+        if (! empty(request()->file("image"))) {
 
             $image = Uploader::_()->uploadImage(request()->file("image"));
 
-            $data["image"] = $image ;
+            $data["image"] = $image;
         }
 
         Course::create($data);
@@ -65,29 +66,29 @@ class CourseController extends BaseController
     }
 
     public function update($id)
-    {   
+    {
 
         $validator = \Validator::make(request()->all(), [
-            "name" => "required",
-            "content" => "required",
+            "name"               => "required",
+            "content"            => "required",
+            "level"              => "required",
             "course_category_id" => "required",
-            "description" => "required",
-            "is_active" => "required"
+            "description"        => "required",
+            "is_active"          => "required",
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator->errors())->withInput();
         }
 
         $data = request()->all();
 
-        if (!empty(request()->file("image"))) {
+        if (! empty(request()->file("image"))) {
 
             $image = Uploader::_()->uploadImage(request()->file("image"));
 
-            $data["image"] = $image ;
+            $data["image"] = $image;
         }
-
 
         Course::find($id)->update($data);
 
@@ -95,40 +96,45 @@ class CourseController extends BaseController
 
     }
 
-    public function remove($id){
-     
+    public function remove($id)
+    {
+
         Course::find($id)->delete();
 
         return redirect()->route("admin.courses.index");
     }
 
-    public function removeImage($id){
-     
+    public function removeImage($id)
+    {
+
         $item = Course::find($id);
 
         Uploader::_()->removeImage($item->image);
 
-        $item->image = ""; 
+        $item->image = "";
 
         $item->save();
 
         return redirect()->route("admin.courses.show", [
-            "id" => $id
+            "id" => $id,
         ]);
     }
 
     public function courses()
     {
-        return response()->json( Course::where("is_active", 1)->orderByDesc("created_at")->paginate(50));
+        return response()->json(Course::where("is_active", 1)->orderByDesc("created_at")->paginate(50));
     }
 
+    public function coursesLevel($id)
+    {
+        return response()->json(Course::where("level", $id)->where("is_active", 1)->orderByDesc("created_at")->paginate(50));
+    }
 
     public function lessons($id)
     {
-        return response()->json( Lesson::where("course_id", $id)->where("is_active", 1)->orderByDesc("created_at")->paginate(50));
+        return response()->json(Lesson::where("course_id", $id)->where("is_active", 1)->orderByDesc("created_at")->paginate(50));
     }
 
-        
     public function showCourse($id)
     {
         return response()->json(Course::where("is_active", 1)->where("id", $id)->paginate(6));

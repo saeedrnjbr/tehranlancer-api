@@ -13,6 +13,7 @@ class Course extends BaseModel
         'description',
         'course_category_id',
         'image',
+        'level',
         'is_active',
     ];
 

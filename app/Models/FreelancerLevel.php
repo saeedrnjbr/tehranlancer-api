@@ -13,7 +13,6 @@ class FreelancerLevel extends Model
         'first_name',
         'last_name',
         'gender',
-        'field',
         'avatar',
         'level',
         'level_result',
