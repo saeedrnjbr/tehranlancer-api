@@ -176,7 +176,7 @@ class UserController extends BaseController
 
             $newUser->save();
 
-            $user = $newUser;
+                $user = $newUser;
 
             if (! empty(request("referral")) && request("mobile") != request("referral")) {
                 User::where("mobile", request("referral"))->increment("coupons", 10);
